@@ -126,9 +126,6 @@ namespace BioMetrixCore
             {
                 using (FingerPrintDB db = new FingerPrintDB())
                 {
-                    //dgvLogs.DataSource = db.Logs.Where(w => w.DateOnlyRecord >= dtpFrom.Value.Date && w.DateOnlyRecord <= dtpTo.Value.Date).ToList();
-                    //dgvLogs.Columns["Id"].Visible = false;
-
                     SqlParameter dtFrom = new SqlParameter("@dtFrom", dtpFrom.Value.Date);
                     SqlParameter dtTo = new SqlParameter("@dtTo", dtpTo.Value.Date);
                     var logs = db.Database.SqlQuery<LogsHours>("GetHours @dtFrom,@dtTo", dtFrom, dtTo).ToList();
@@ -156,6 +153,8 @@ namespace BioMetrixCore
         {
             try
             {
+                if (dgvLogs.Rows.Count == 0)
+                    return;
                 SaveFileDialog dlg = new SaveFileDialog
                 {
                     FileName = "الساعات المسجله",
@@ -216,6 +215,73 @@ namespace BioMetrixCore
             }
         }
 
+        private void btnGetAllData_Click(object sender, EventArgs e)
+        {
+            using (FingerPrintDB db = new FingerPrintDB())
+            {
+                dgvLogs.DataSource = db.Logs.Where(w => w.DateOnlyRecord >= dtpFrom.Value.Date && w.DateOnlyRecord <= dtpTo.Value.Date).ToList();
+                dgvLogs.Columns["Id"].Visible = false;
+            }
+
+        }
+
+        private void btnExportAllData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FingerPrintDB db = new FingerPrintDB())
+                {
+                    var allData = db.Logs.Where(w => w.DateOnlyRecord >= dtpFrom.Value.Date && w.DateOnlyRecord <= dtpTo.Value.Date).ToList();
+
+                    if (dgvLogs.Rows.Count == 0)
+                        return;
+                    SaveFileDialog dlg = new SaveFileDialog
+                    {
+                        FileName = "جميع البيانات",
+                        DefaultExt = ".xls",
+                        Filter = "Text documents (.xls)|*.xls"
+                    };
+                    if (dlg.ShowDialog() != DialogResult.OK)
+                        return;
+                    int i = 2;
+                    Excel.Application xlApp;
+                    Excel.Workbook xlWorkBook;
+                    Excel.Worksheet xlWorkSheet;
+                    object misValue = System.Reflection.Missing.Value;
+
+                    xlApp = new Excel.Application();
+                    xlWorkBook = xlApp.Workbooks.Add(misValue);
+                    xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                    xlWorkSheet.Cells[1, 1] = "MachineNumber";
+                    xlWorkSheet.Cells[1, 2] = "Status";
+                    xlWorkSheet.Cells[1, 3] = "IndRegID";
+                    xlWorkSheet.Cells[1, 4] = "DateTimeRecord";
+                    xlWorkSheet.Cells[1, 5] = "DateOnlyRecord";
+                    xlWorkSheet.Cells[1, 6] = "TimeOnlyRecord";
+
+                    foreach (var item in allData)
+                    {
+                        xlWorkSheet.Cells[i, 1] = item.MachineNumber;
+                        xlWorkSheet.Cells[i, 2] = item.Status;
+                        xlWorkSheet.Cells[i, 3] = item.IndRegID;
+                        xlWorkSheet.Cells[i, 4] = item.DateTimeRecord;
+                        xlWorkSheet.Cells[i, 5] = item.DateOnlyRecord;
+                        xlWorkSheet.Cells[i, 6] = item.TimeOnlyRecord;
+                        i++;
+                    }
+                    xlWorkBook.SaveAs(dlg.FileName, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+                    ReleaseObject(xlWorkSheet);
+                    ReleaseObject(xlWorkBook);
+                    ReleaseObject(xlApp);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 
     public class Machine

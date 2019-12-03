@@ -77,18 +77,6 @@
       <DependentUpon>DataInsert.cs</DependentUpon>
     </Compile>
     <Compile Include="Info\UserIDInfo.cs" />
-    <Compile Include="Migrations\201912030249460_init-db.cs" />
-    <Compile Include="Migrations\201912030249460_init-db.designer.cs">
-      <DependentUpon>201912030249460_init-db.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912030337341_string-date.cs" />
-    <Compile Include="Migrations\201912030337341_string-date.designer.cs">
-      <DependentUpon>201912030337341_string-date.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912030925246_status.cs" />
-    <Compile Include="Migrations\201912030925246_status.designer.cs">
-      <DependentUpon>201912030925246_status.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FingerPrintDB.cs" />
     <Compile Include="Models\Log.cs" />
@@ -116,15 +104,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Master.resx">
       <DependentUpon>Master.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912030249460_init-db.resx">
-      <DependentUpon>201912030249460_init-db.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912030337341_string-date.resx">
-      <DependentUpon>201912030337341_string-date.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912030925246_status.resx">
-      <DependentUpon>201912030925246_status.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

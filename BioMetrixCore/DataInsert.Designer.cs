@@ -35,6 +35,8 @@
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.btnExport = new System.Windows.Forms.Button();
+            this.btnGetAllData = new System.Windows.Forms.Button();
+            this.btnExportAllData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,11 +52,11 @@
             // 
             // btnGetLogs
             // 
-            this.btnGetLogs.Location = new System.Drawing.Point(292, 42);
+            this.btnGetLogs.Location = new System.Drawing.Point(354, 20);
             this.btnGetLogs.Name = "btnGetLogs";
             this.btnGetLogs.Size = new System.Drawing.Size(171, 36);
             this.btnGetLogs.TabIndex = 1;
-            this.btnGetLogs.Text = "Get Logs";
+            this.btnGetLogs.Text = "Get Attendance";
             this.btnGetLogs.UseVisualStyleBackColor = true;
             this.btnGetLogs.Click += new System.EventHandler(this.btnGetLogs_Click);
             // 
@@ -95,19 +97,41 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(276, 385);
+            this.btnExport.Location = new System.Drawing.Point(17, 367);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(171, 36);
+            this.btnExport.Size = new System.Drawing.Size(192, 36);
             this.btnExport.TabIndex = 6;
-            this.btnExport.Text = "Export To Excel";
+            this.btnExport.Text = "Export Attendance To Excel";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnGetAllData
+            // 
+            this.btnGetAllData.Location = new System.Drawing.Point(354, 65);
+            this.btnGetAllData.Name = "btnGetAllData";
+            this.btnGetAllData.Size = new System.Drawing.Size(171, 36);
+            this.btnGetAllData.TabIndex = 7;
+            this.btnGetAllData.Text = "Get All Data";
+            this.btnGetAllData.UseVisualStyleBackColor = true;
+            this.btnGetAllData.Click += new System.EventHandler(this.btnGetAllData_Click);
+            // 
+            // btnExportAllData
+            // 
+            this.btnExportAllData.Location = new System.Drawing.Point(244, 367);
+            this.btnExportAllData.Name = "btnExportAllData";
+            this.btnExportAllData.Size = new System.Drawing.Size(171, 36);
+            this.btnExportAllData.TabIndex = 8;
+            this.btnExportAllData.Text = "Export All Data To Excel";
+            this.btnExportAllData.UseVisualStyleBackColor = true;
+            this.btnExportAllData.Click += new System.EventHandler(this.btnExportAllData_Click);
             // 
             // DataInsert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnExportAllData);
+            this.Controls.Add(this.btnGetAllData);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.dtpTo);
             this.Controls.Add(this.dtpFrom);
@@ -131,5 +155,7 @@
         private System.Windows.Forms.DateTimePicker dtpFrom;
         private System.Windows.Forms.DateTimePicker dtpTo;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnGetAllData;
+        private System.Windows.Forms.Button btnExportAllData;
     }
 }
